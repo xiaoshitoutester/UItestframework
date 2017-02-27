@@ -12,17 +12,20 @@ def get_xls_to_dict(xlsname, sheetname):
 	第一行为字典的key，下面的为值
 	return [{'title':'1','user':'root'},{'title':'2','user':'xiaoshitou'}]
 	"""
-	dataresult = []
-	result = []
+	# dataresult = []
+	# result = []
 	datapath = os.path.join(data_path,xlsname)
 	xls1 = xlrd.open_workbook(datapath)
 	table = xls1.sheet_by_name(sheetname)
-	for i in range(0,table.nrows):
-		dataresult.append(table.row_values(i))
+	# for i in range(0,table.nrows):
+	# 	dataresult.append(table.row_values(i))
+	dataresult = [table.row_values(i) for i in range(0, tabl.nrows)]
 	#将list转化成dict
-	for i in range(1,len(dataresult)):
-		temp = dict(zip(dataresult[0],dataresult[i]))
-		result.append(temp)
+	# for i in range(1,len(dataresult)):
+	# 	temp = dict(zip(dataresult[0],dataresult[i]))
+	# 	result.append(temp)
+
+	result = [ dict(zip(dataresult[0], dataresult[i])) for i in range(1, len(dataresult))]
 	return result
 
 def get_url_data(title):
